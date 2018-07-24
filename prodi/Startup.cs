@@ -40,6 +40,10 @@ namespace prodi
             app.UseMvc();
         }
 
+        /// <summary>
+        /// Initialises the test data.
+        /// </summary>
+        /// <param name="context">The API's database context</param>
         internal static void InitialiseTestData(ApiContext context)
         {
             var product = new Product

@@ -18,7 +18,7 @@ namespace prodi.Controllers
 
         // GET api/products
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery]string description, 
+        public async Task<IActionResult> Get([FromQuery]string description,
                                              [FromQuery]string model,
                                              [FromQuery]string brand)
         {
@@ -28,14 +28,18 @@ namespace prodi.Controllers
                                           && (model == null ? true : p.Model == model)
                                           && (brand == null ? true : p.Brand == brand))
                                    .Select(p => new
-            {
-                id = p.Id,
-                description = p.Description,
-                model = p.Model,
-                brand = p.Brand
-            });
+                                   {
+                                       id = p.Id,
+                                       description = p.Description,
+                                       model = p.Model,
+                                       brand = p.Brand
+                                   });
 
-            return Ok(response);
+            if (response.Any())
+            {
+                return Ok(response);
+            }
+            return NotFound();
         }
 
         // GET api/products/5
@@ -87,7 +91,7 @@ namespace prodi.Controllers
                 productToUpdate.Model = product.Model;
                 productToUpdate.Brand = product.Brand;
                 _context.SaveChanges();
-                
+
                 return NoContent();
             }
             catch
