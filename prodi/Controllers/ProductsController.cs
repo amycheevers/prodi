@@ -52,7 +52,7 @@ namespace prodi.Controllers
 
         // POST api/products
         [HttpPost]
-        public async Task<IActionResult> PostProducts([FromBody]Product product)
+        public async Task<IActionResult> Post([FromBody]Product product)
         {
             var products = await _context.Products.ToArrayAsync();
 
