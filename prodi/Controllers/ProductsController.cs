@@ -18,11 +18,16 @@ namespace prodi.Controllers
 
         // GET api/products
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]string description, 
+                                             [FromQuery]string model,
+                                             [FromQuery]string brand)
         {
             var products = await _context.Products.ToArrayAsync();
 
-            var response = products.Select(p => new
+            var response = products.Where(p => (description == null ? true : p.Description == description)
+                                          && (model == null ? true : p.Model == model)
+                                          && (brand == null ? true : p.Brand == brand))
+                                   .Select(p => new
             {
                 id = p.Id,
                 description = p.Description,

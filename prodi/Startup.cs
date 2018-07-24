@@ -20,9 +20,9 @@ namespace prodi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-#pragma warning disable CS0618 // Type or member is obsolete
+            #pragma warning disable CS0618 // Type or member is obsolete
             services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase());
-#pragma warning restore CS0618 // Type or member is obsolete
+            #pragma warning restore CS0618 // Type or member is obsolete
             services.AddMvc();
         }
 
@@ -44,26 +44,25 @@ namespace prodi
         {
             var product = new Product
             {
-                Description = "Samsung's newest mobile phone",
-                Model = "Galaxy S9",
-                Brand = "Samsung"
-            };
-            context.Products.Add(product);
-
-
-            product = new Product
-            {
-                Description = "Samsung's newest mobile phone",
-                Model = "Galaxy S9",
-                Brand = "Samsung"
+                Description = "AAA",
+                Model = "CCC",
+                Brand = "DDD"
             };
             context.Products.Add(product);
 
             product = new Product
             {
-                Description = "Samsung's newest mobile phone",
-                Model = "Galaxy S9",
-                Brand = "Samsung"
+                Description = "BBB",
+                Model = "CCC",
+                Brand = "EEE"
+            };
+            context.Products.Add(product);
+
+            product = new Product
+            {
+                Description = "BBB",
+                Model = "CCC",
+                Brand = "FFF"
             };
             context.Products.Add(product);
 
