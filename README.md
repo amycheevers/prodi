@@ -2,7 +2,7 @@
 A RESTful web service built with the ASP.NET Web API platform using C#.
 ## Prerequisites
 You will need the following:
-   - [.NET Core SDK 2.1 or higher](https://www.microsoft.com/net/download)
+   - [.NET Core SDK 2.1](https://www.microsoft.com/net/download)
    - [Postman IDE](https://www.getpostman.com/)
 ## Using the API
 ### Step 1: Cloning the repository
