@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using prodi.Models;
 
 namespace prodi
 {
@@ -23,18 +20,54 @@ namespace prodi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+#pragma warning disable CS0618 // Type or member is obsolete
+            services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase());
+#pragma warning restore CS0618 // Type or member is obsolete
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            var context = serviceProvider.GetService<ApiContext>();
+            InitialiseTestData(context);
+
             app.UseMvc();
+        }
+
+        internal static void InitialiseTestData(ApiContext context)
+        {
+            var product = new Product
+            {
+                Description = "Samsung's newest mobile phone",
+                Model = "Galaxy S9",
+                Brand = "Samsung"
+            };
+            context.Products.Add(product);
+
+
+            product = new Product
+            {
+                Description = "Samsung's newest mobile phone",
+                Model = "Galaxy S9",
+                Brand = "Samsung"
+            };
+            context.Products.Add(product);
+
+            product = new Product
+            {
+                Description = "Samsung's newest mobile phone",
+                Model = "Galaxy S9",
+                Brand = "Samsung"
+            };
+            context.Products.Add(product);
+
+            context.SaveChanges();
         }
     }
 }
